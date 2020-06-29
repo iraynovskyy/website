@@ -1,0 +1,101 @@
+<form action="{% url 'music:favorite' album.id %}" method="post">
+        {% csrf_token %}
+        {% for song in album.song_set.all %}
+            <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />
+            <label for="song{{ forloop.counter }}">
+                {{ song.song_title }}
+                {% if song.is_favorite %}
+                    <img src="data:image/png;base64,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" />
+                {% endif %}
+            </label><br>
+        {% endfor %}
+        <input type="submit" value="Favorite">
+    </form>
+
+
+
+
+from django.http import Http404
+# from django.http import HttpResponse
+# from django.template import loader
+from django.shortcuts import render, get_object_or_404
+from .models import Album, Song
+
+'''
+def index(request):
+    # return HttpResponse("<h1>This is the Music app homepage<h1>")
+    # all_albums = Album.objects.all()
+    # html = ''
+    # for album in all_albums:
+    #     url = '/music/' + str(album.id) + '/'
+    #     html += '<a href="' + url + '">' + album.album_title + '</a><br>'
+    # return HttpResponse(html)
+
+    all_albums = Album.objects.all()
+    template = loader.get_template('music/index.html')
+    context = {
+        'all_albums': all_albums
+    }
+    return HttpResponse(template.render(context, request))
+'''
+
+def index(request):
+    all_albums = Album.objects.all()
+    context = {'all_albums': all_albums}
+    return render(request, 'music/index.html', context)
+
+def detail(request, album_id):
+    # return HttpResponse("<h2>Details for Album id: " + str(album_id) + "</h2>")
+    '''
+    try:
+        album = Album.objects.get(pk=album_id)  # pk = id
+    except Album.DoesNotExist:
+        raise Http404("Album does not exist")
+    '''
+
+    # album = Album.objects.get(pk=album_id)
+    album = get_object_or_404(Album, pk=album_id)
+    return render(request, 'music/detail.html', {'album': album})
+
+def favorite(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    try:
+        selected_song = album.song_set.get(pk=request.POST['song'])# we are taking a number of selected song
+    except (KeyError, Song.DoesNotExist):
+        return render(request, 'music/detail.html', {
+            'album': album,
+            'error_message': "You did not select a valid song",
+        })
+    else:
+        selected_song.is_favorite = True
+        selected_song.save()
+        return render(request, 'music/detail.html', {'album': album})
+
+
+
+
+        # /music/<album_id >/favorite/
+    url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
+
+
+
+
+'''
+    # /music/album/2/
+    url(r'album/^(?P<pk>[0-9]+)/$', views.AlbumUpdate.as_view(), name='album-update'),
+
+    # /music/album/2/delete/
+    url(r'album/^(?P<pk>[0-9]+)/delete/$', views.AlbumDelete.as_view(), name='album-delete'),
+'''
+
+
+
+<!--
+                <form action="{% url 'music:album-delete' album.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+-->

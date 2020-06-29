@@ -1,0 +1,9 @@
+from rest_framework import serializers
+from .models import Stock
+
+class StockSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Stock
+        # fields = ('ticker', 'volume')         # to give a specific data back
+        fields = '__all__'                      # to give all data.
