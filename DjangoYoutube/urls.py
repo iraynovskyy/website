@@ -17,6 +17,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from companies import views
 
 urlpatterns = [
+    url(r'^$',views.HomeView.as_view()), # main page / was empty as was working
     url(r'^admin/', admin.site.urls),
     # path('', include('music.urls')),    # if empty space then do...
     url(r'^music/', include('music.urls')),

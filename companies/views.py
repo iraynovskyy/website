@@ -21,3 +21,12 @@ class StockList(APIView):
     def post(self):    # submitting the form
         pass
 
+from django.views import generic
+from music.models import Album
+
+class HomeView(generic.ListView):
+    template_name = 'music/home.html'
+    context_objext_name = 'all_albums'
+
+    def get_queryset(self):
+        return Album.objects.all()
